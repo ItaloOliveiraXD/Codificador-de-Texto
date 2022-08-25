@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title>Codificador - Pessoal</title>
+		<link rel="stylesheet" href="reset.css">
+		<link rel="stylesheet" href="style.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+	</head>
+
+	<body>
+		<header>
+			<h1 class="logo"><img src="logo-colorido.png" width="300" height="180"> </h1>
+		</header>
+
+		<main>
+
+			<div class="caixa">
+				<div class="area-texto">
+					<section class="area-criptografar">
+						<textarea cols="50" rows="15" class="msg-criptografar" placeholder="Digite seu texto"></textarea>
+						<p class="texto-atencao">Apenas letras minúsculas sem acento!</p>
+					</section>
+
+					<section class="descriptografar">
+						<textarea cols="27" rows="25" class="msg-descriptografar" placeholder="Nenhuma menssagem criptografada ou descriptografada."></textarea>
+					</section>
+				</div>
+
+				<section class="area-botoes">
+					<button class="botoes" id="botao-criptografar" onclick="bntCriptografar()">Criptografar</button>
+					<button class="botoes" id="botao-descriptografar" onclick="bntDescriptografar()">Descriptografar</button>
+					<button class="botoes" id="botao-copiar" onclick="bntCopiar()">Copiar</button>
+				</section>
+			</div>
+		</main>
+
+		<footer>
+
+			<div class="rodape">
+				<img class="img-rodape" src="logo-branco2.png" width="200" height="50">
+				<p class="text-copyright">&copy; 2022 - Developed by Italo Oliveira</p>
+			</div>
+		</footer>
+	</body>
+
+
+</html>
+
+
+<script type="text/javascript">
+
+	const msg_Criptografar = document.querySelector('.msg-criptografar');
+	const msg_Descriptografar = document.querySelector('.msg-descriptografar');
+
+	
+
+	function bntCriptografar() {
+		var textEncripitar = encripitar(msg_Criptografar.value);
+		msg_Descriptografar.value = textEncripitar;
+	}
+
+	function bntDescriptografar() {
+		var textDescriptografar = descriptografar(msg_Criptografar.value);
+		msg_Descriptografar.value = textDescriptografar;
+	}
+
+	function bntCopiar() {
+		navigator.clipboard.writeText(msg_Descriptografar.value);
+	}
+
+	function encripitar(stringEncriptada) {
+		var palavas_Chaves = [['e', 'enter'], ['i', 'imes'], ['a', 'ai'], ['o', 'ober'], ['u', 'ufat']];
+
+		stringEncriptada = stringEncriptada.toLowerCase();
+
+		for (let i = 0; i < palavas_Chaves.length; i++) {
+			if (stringEncriptada.includes(palavas_Chaves[i][0])){
+				stringEncriptada = stringEncriptada.replaceAll(palavas_Chaves[i][0], palavas_Chaves[i][1]);
+			}
+		}
+
+		return stringEncriptada;
+	}
+
+	function descriptografar(stringDesencriptografar) {
+		var palavas_Chaves = [['e', 'enter'], ['i', 'imes'], ['a', 'ai'], ['o', 'ober'], ['u', 'ufat']];
+
+		stringDesencriptografar = stringDesencriptografar.toLowerCase();
+
+		for (let i = 0; i < palavas_Chaves.length; i++) {
+			if (stringDesencriptografar.includes(palavas_Chaves[i][1])) {
+				stringDesencriptografar = stringDesencriptografar.replaceAll(palavas_Chaves[i][1],palavas_Chaves[i][0]);
+			}
+		}
+
+		return stringDesencriptografar;
+	}
+
+
+</script>
